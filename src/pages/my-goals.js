@@ -14,7 +14,14 @@ function MyGoals({ onAddGoals }) {
         setError('');
         
         try {
-            const response = await fetch('http://localhost:8000/goals');
+            const token = localStorage.getItem('token');
+            const response = await fetch('http://localhost:8000/goals',
+                {
+                    headers: {
+                        'Authorization': `Bearer ${token}`
+                    }
+                }
+            );
             const data = await response.json();
             
             if (response.ok) {
@@ -35,8 +42,12 @@ function MyGoals({ onAddGoals }) {
         }
 
         try {
+            const token = localStorage.getItem('token');
             const response = await fetch(`http://localhost:8000/goals/${goalId}`, {
-                method: 'DELETE'
+                method: 'DELETE',
+                headers: {
+                    'Authorization': `Bearer ${token}`
+                }
             });
 
             if (response.ok) {

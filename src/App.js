@@ -35,7 +35,12 @@ function App() {
 
   const fetchGoals = async () => {
     try {
-      const response = await fetch('http://localhost:8000/goals');
+      const token = localStorage.getItem('token');
+      const response = await fetch('http://localhost:8000/goals', {
+        headers: {
+          'Authorization': `Bearer ${token}`
+        }
+      });
       const data = await response.json();
       setGoals(data.goals || []);
     } catch (error) {
@@ -45,7 +50,12 @@ function App() {
 
   const fetchTasks = async () => {
     try {
-      const response = await fetch('http://localhost:8000/tasks');
+      const token = localStorage.getItem('token');
+      const response = await fetch('http://localhost:8000/tasks', {
+        headers: {
+          'Authorization': `Bearer ${token}`
+        }
+      });
       const data = await response.json();
       setTasks(data.tasks || []);
     } catch (error) {
@@ -57,6 +67,22 @@ function App() {
     setLoading(true);
     
     try {
+      // Fetch fresh goals from server
+      const token = localStorage.getItem('token');
+      const goalsRes = await fetch('http://localhost:8000/goals', {
+        headers: {
+          'Authorization': `Bearer ${token}`
+        }
+      });
+      const goalsData = await goalsRes.json();
+      const currentGoals = goalsData.goals || [];
+      
+      if (currentGoals.length === 0) {
+        setResponse('Error: No goals found. Please add some goals first.');
+        setLoading(false);
+        return;
+      }
+      
       // Delete all existing tasks if there are any
       if (tasks.length > 0) {
         const deleteRes = await fetch('http://localhost:8000/tasks/all', {
@@ -70,7 +96,7 @@ function App() {
         }
       }
       
-      const goalsWithIds = goals.map(g => `Goal ID ${g.id}: ${g.title} - ${g.description}`).join('\n');
+      const goalsWithIds = currentGoals.map(g => `Goal ID ${g.id}: ${g.title} - ${g.description}`).join('\n');
       
       const fullPrompt = `Based on these goals:\n${goalsWithIds}\n\nGenerate 5 specific, actionable tasks. For each task, determine which goal it relates to.\nReturn ONLY a JSON array with this exact format:\n[{"task": "task description", "goal_id": 1, "priority": "high/medium/low"}]\n\nNo other text, just the JSON array.`;
       console.log(fullPrompt);
@@ -164,8 +190,12 @@ function App() {
         }
 
         try {
+            const token = localStorage.getItem('token');
             const response = await fetch(`http://localhost:8000/tasks/${taskId}`, {
-                method: 'DELETE'
+                method: 'DELETE',
+                headers: {
+                    'Authorization': `Bearer ${token}`
+                }
             });
 
             if (response.ok) {
