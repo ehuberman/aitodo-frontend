@@ -226,7 +226,7 @@ function App() {
     return (
       <div className="App">
         <header className="App-header">
-          <div className="header-top">
+          <nav className="navbar">
             <button onClick={() => setCurrentPage('home')} className="back-btn">
               ← Back
             </button>
@@ -234,9 +234,11 @@ function App() {
             <button onClick={handleLogout} className="logout-btn">
               Logout
             </button>
-          </div>
-          <AddGoals onGoalAdded={handleGoalAdded} />
+          </nav>
         </header>
+        <div className="main-content">
+          <AddGoals onGoalAdded={handleGoalAdded} />
+        </div>
       </div>
     );
   }
@@ -245,7 +247,7 @@ function App() {
     return (
       <div className="App">
         <header className="App-header">
-          <div className="header-top">
+          <nav className="navbar">
             <button onClick={() => setCurrentPage('home')} className="back-btn">
               ← Back
             </button>
@@ -253,9 +255,11 @@ function App() {
             <button onClick={handleLogout} className="logout-btn">
               Logout
             </button>
-          </div>
-          <MyGoals onAddGoals={() => setCurrentPage('add-goals')} />
+          </nav>
         </header>
+        <div className="main-content">
+          <MyGoals onAddGoals={() => setCurrentPage('add-goals')} />
+        </div>
       </div>
     );
   }
@@ -263,12 +267,14 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <div className="header-top">
+        <nav className="navbar">
           <h1>AI Todo Assistant</h1>
           <button onClick={handleLogout} className="logout-btn">
             Logout
           </button>
-        </div>
+        </nav>
+      </header>
+      <div className="main-content">
         
         <div className="navigation">
           <button onClick={() => setCurrentPage('add-goals')} className="nav-btn">
@@ -328,7 +334,7 @@ function App() {
             onClose={() => setSelectedTask(null)} 
           />
         )}
-      </header>
+      </div>
     </div>
   );
 }

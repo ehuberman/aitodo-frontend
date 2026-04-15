@@ -18,22 +18,34 @@ body {
   background: white;
   border-bottom: 1px solid #e5e5e5;
   padding: 0;
+  position: sticky;
+  top: 0;
+  z-index: 100;
 }
 
-.header-top {
+.navbar {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 20px 32px;
+  padding: 16px 32px;
   max-width: 1200px;
   margin: 0 auto;
+  background: white;
 }
 
-.header-top h1 {
+.navbar h1 {
   margin: 0;
-  font-size: 24px;
-  font-weight: 600;
-  color: #1a1a1a;
+  font-size: 28px;
+  font-weight: 700;
+  background: linear-gradient(135deg, #007aff 0%, #5856d6 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  letter-spacing: -0.5px;
+}
+
+.main-content {
+  padding-top: 32px;
 }
 
 .logout-btn, .back-btn {
