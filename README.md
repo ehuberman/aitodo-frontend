@@ -36,7 +36,7 @@ Serves the production build locally for testing before deploy.
 
 ## Notes
 
-- Requires the backend running at `http://localhost:8000` (see [backend README](../aitodo-backend/README.md))
+- Requires the backend running at `http://localhost:8000` (see [backend README](https://github.com/ehuberman/aitodo-backend/blob/main/README.md))
 - Auth is handled via JWT — token is stored in `localStorage`
 - The chat window (`chat-window.jsx`) lets you ask Claude follow-up questions about any task
 - Built with Vite; dev server is configured to run on port `3000`
