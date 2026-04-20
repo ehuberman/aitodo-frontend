@@ -4,8 +4,10 @@ A React frontend for an AI-powered todo app. Set a goal, and Claude (via AWS Bed
 
 ## Demo
 
+### Login Functionality
 ![Login](public/Login.gif)
 
+### Remaining features
 ![Demo](public/Demo.gif)
 
 ## Available Scripts
